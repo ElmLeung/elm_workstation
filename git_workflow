@@ -1,7 +1,7 @@
---- 安装git
+--- 01.安装git
 apt-get install -y git 
 
---- git 初始配置
+--- 02.git 初始配置
 git config --global --user.name "XXX"
 git config --global --user.email "XXX@outlook.com"
 
@@ -17,10 +17,20 @@ git config --list #列出当前的配置，--[local|global|system]
 git add . #添加变更到暂存区
 git commit -m "XXX" #提交变更到工作区
 git mv X1 X2 #重命名X1到X2
+git commit --amend #对最近一次commit进行message修改
+git rebase -i commit_id #对某次提交进行修改，commit_id是要变更的commit的parent_commit_id, id号会变，-i 交互模式
 
 --- git 分支
-git branch -av #查看分支
+git branch -av #查看分支,a-all,v-verbose
 git checkout -b firefox_bookmarks 078d9bca #从078d9bca 创建分支并跳转到该分支，并将原本的暂存区的变更提交到该分支工作区
+git checkout -b new_branch old_branch #从已有分支上创建新分支
+git checkout master #切换分支到master
+git branch -d branch_name #删除分支 -D 强制删除
+
+--- git diff
+git diff HEAD HEAD~1
+git diff HEAD HEAD^1 #(HEAD^1^1,HEAD^^,HEAD~2)
+git diff commit_id_1 commit_id_2
 
 
 --- git 还原
@@ -28,3 +38,34 @@ git reset --hard #暂存区的所有变更都会还原
 
 --- git log
 git log --oneline --graph --all -n4 #oneline-列表形式，graph-分支辅助线，all-所有分支，n4-最近的4次提交
+git cat-file -t 078d9bca #查看对象类型
+git cat-file -p #打印对象的内容
+
+--- git dir
+```
+elm@elm-Precision-Tower-7910:~/elm_workstation$ tree -L 1 .git 
+.git                 #当前仓库的配置
+├── branches
+├── COMMIT_EDITMSG
+├── config
+├── description
+├── gitk.cache
+├── HEAD             #the current branch 
+├── hooks
+├── index
+├── info
+├── logs
+├── objects          #object tpye:commit,tags,tree,blob
+└── refs             #the hash value of the lastest commit from all branchs
+
+~/.gitconfig         #当前用户的git配置
+```
+--- git object
+- commit: 一个commit 对应一个tree,
+- tree: 相当于快照,保存相应时间点的信息，其中还含有blob的指针，一个blob就是一个数据对象。信息里面的目录也会成为tree 对象。
+- blob: 不管文件名叫什么，只要内容相同就只有一个。
+- 当变更添加到暂存区的时候，git已经创建了blob。
+
+--- 分离头指针
+git checkout 某个commit的时候，会进入分离头状态，这个状态没有跟分支挂钩，切换到其他分支的时候，会被丢弃掉。
+想做一些尝试性的变更，发现效果不好，切换到其他分支
