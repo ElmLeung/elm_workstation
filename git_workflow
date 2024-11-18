@@ -1,6 +1,7 @@
----
+--- 安装git
 apt-get install -y git 
----
+
+--- git 初始配置
 git config --global --user.name "XXX"
 git config --global --user.email "XXX@outlook.com"
 
@@ -9,3 +10,21 @@ git config --global --user.email "XXX@outlook.com"
 --system #对登陆系统的所有用户生效
 
 git config --list #列出当前的配置，--[local|global|system] 
+
+---
+---
+--- git 基础命令
+git add . #添加变更到暂存区
+git commit -m "XXX" #提交变更到工作区
+git mv X1 X2 #重命名X1到X2
+
+--- git 分支
+git branch -av #查看分支
+git checkout -b firefox_bookmarks 078d9bca #从078d9bca 创建分支并跳转到该分支，并将原本的暂存区的变更提交到该分支工作区
+
+
+--- git 还原
+git reset --hard #暂存区的所有变更都会还原
+
+--- git log
+git log --oneline --graph --all -n4 #oneline-列表形式，graph-分支辅助线，all-所有分支，n4-最近的4次提交
