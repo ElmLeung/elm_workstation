@@ -1,0 +1,11 @@
+---
+apt-get install -y git 
+---
+git config --global --user.name "XXX"
+git config --global --user.email "XXX@outlook.com"
+
+--local #只对当前仓库生效
+--global #对当前用户生效
+--system #对登陆系统的所有用户生效
+
+git config --list #列出当前的配置，--[local|global|system] 
