@@ -14,11 +14,14 @@ git config --list #列出当前的配置，--[local|global|system]
 ---
 ---
 --- git 基础命令
-git add . #添加变更到暂存区
-git commit -m "XXX" #提交变更到工作区
+git add . #添加修改到暂存区
+git commit -m "XXX" #提交工作区变更
 git mv X1 X2 #重命名X1到X2
 git commit --amend #对最近一次commit进行message修改
-git rebase -i commit_id #对某次提交进行修改，commit_id是要变更的commit的parent_commit_id, id号会变，-i 交互模式
+git rebase -i commit_id #r:对某次提交的message进行修改，commit_id是要变更的commit的parent_commit_id, id号会变，-i 交互模式
+                        #s:同一分支下，以parent_commit_id为基础，将后面几个commit合并为一个commit
+                        #s:同一分支下，以parent_commit_id为基础，选择间隔的几个commit合并为一个commit,需要解决冲突问题
+git rm file_name
 
 --- git 分支
 git branch -av #查看分支,a-all,v-verbose
@@ -26,21 +29,41 @@ git checkout -b firefox_bookmarks 078d9bca #从078d9bca 创建分支并跳转到
 git checkout -b new_branch old_branch #从已有分支上创建新分支
 git checkout master #切换分支到master
 git branch -d branch_name #删除分支 -D 强制删除
+git stash #存放工作区，开发过程中遇到新的紧急任务，可以对紧急任务进行操作，后面再回来操作
+git stash apply #恢复暂停的项目，恢复后列表里面还在
+git stash pop   #恢复暂停的项目，恢复后列表里面删除
+git stash list  #列出暂停的项目
 
 --- git diff
 git diff HEAD HEAD~1
 git diff HEAD HEAD^1 #(HEAD^1^1,HEAD^^,HEAD~2)
-git diff commit_id_1 commit_id_2
+git diff commit_id_1 commit_id_2 
 git diff --cached
 git diff -- file_name_1 file_name_2
+git diff branch_1 branch_2 -- file_name
+git merge github/master #--allow-unrelated-histories
+
 
 --- git 还原
-git reset --hard #暂存区的所有变更都会还原
+git reset --hard #暂存区的所有变更都会还原,指定commit,会把commit 之后的提交全部丢弃
+git reset HEAD -- file_name  #暂存区恢复到HEAD一样, 不指定文件将应用到所有文件
+git checkout -- file_name #工作区变更恢复为暂存区一致
+
 
 --- git log
 git log --oneline --graph --all -n4 #oneline-列表形式，graph-分支辅助线，all-所有分支，n4-最近的4次提交
 git cat-file -t 078d9bca #查看对象类型
 git cat-file -p #打印对象的内容
+
+--- git backup
+git remote add zhineng file:///Users/elm/Elm_workstation.git
+git push --set-upstream zhineng ElmLeung
+git remote -v #查看所有的远程仓库
+git remote add github git@github.com:ElmLeung/elm_workstation.git
+git push github --all
+git fetch github master #拉取远程仓库代码
+
+
 
 --- git dir
 ```
