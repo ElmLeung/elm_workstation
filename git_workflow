@@ -31,7 +31,8 @@ git branch -d branch_name #删除分支 -D 强制删除
 git diff HEAD HEAD~1
 git diff HEAD HEAD^1 #(HEAD^1^1,HEAD^^,HEAD~2)
 git diff commit_id_1 commit_id_2
-
+git diff --cached
+git diff -- file_name_1 file_name_2
 
 --- git 还原
 git reset --hard #暂存区的所有变更都会还原
