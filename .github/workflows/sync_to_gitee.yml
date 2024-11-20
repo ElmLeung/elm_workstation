@@ -10,5 +10,5 @@ jobs:
       uses: actions/checkout@v2
     - name: sync with gitee
       run:
-        git remote add gitee https://gitee.com/mchappy/elm_workstation.git
+        git remote add gitee https://mchappy:${GITEE_TOKEN}@gitee.com/mchappy/elm_workstation.git
         git push --force gitee master
