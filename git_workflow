@@ -1,6 +1,18 @@
+<<<<<<< HEAD
 ---
 apt-get install -y git 
 ---
+=======
+###
+Github 的愿景是使协作和编写软件更容易
+致力于解决所有软件开发人员遇到的痛苦问题，具有解决人类问题的巨大潜力，轻松，安全和远程协作软件项目
+###
+
+--- 01.安装git
+apt-get install -y git 
+
+--- 02.git 初始配置
+>>>>>>> main
 git config --global --user.name "XXX"
 git config --global --user.email "XXX@outlook.com"
 
@@ -9,3 +21,96 @@ git config --global --user.email "XXX@outlook.com"
 --system #对登陆系统的所有用户生效
 
 git config --list #列出当前的配置，--[local|global|system] 
+<<<<<<< HEAD
+=======
+
+---
+---
+--- git 基础命令
+git add . #添加修改到暂存区
+git commit -m "XXX" #提交工作区变更
+git mv X1 X2 #重命名X1到X2
+git commit --amend #对最近一次commit进行message修改
+git rebase -i commit_id #r:对某次提交的message进行修改，commit_id是要变更的commit的parent_commit_id, id号会变，-i 交互模式
+                        #s:同一分支下，以parent_commit_id为基础，将后面几个commit合并为一个commit
+                        #s:同一分支下，以parent_commit_id为基础，选择间隔的几个commit合并为一个commit,需要解决冲突问题
+git rm file_name
+
+--- git 分支
+git branch -av #查看分支,a-all,v-verbose
+git checkout -b firefox_bookmarks 078d9bca #从078d9bca 创建分支并跳转到该分支，并将原本的暂存区的变更提交到该分支工作区
+git checkout -b new_branch old_branch #从已有分支上创建新分支
+git checkout master #切换分支到master
+git branch -d branch_name #删除分支 -D 强制删除
+git stash #存放工作区，开发过程中遇到新的紧急任务，可以对紧急任务进行操作，后面再回来操作
+git stash apply #恢复暂停的项目，恢复后列表里面还在
+git stash pop   #恢复暂停的项目，恢复后列表里面删除
+git stash list  #列出暂停的项目
+
+--- git diff
+git diff HEAD HEAD~1
+git diff HEAD HEAD^1 #(HEAD^1^1,HEAD^^,HEAD~2)
+git diff commit_id_1 commit_id_2 
+git diff --cached
+git diff -- file_name_1 file_name_2
+git diff branch_1 branch_2 -- file_name
+git merge github/master #--allow-unrelated-histories
+
+
+--- git 还原
+git reset --hard #暂存区的所有变更都会还原,指定commit,会把commit 之后的提交全部丢弃
+git reset HEAD -- file_name  #暂存区恢复到HEAD一样, 不指定文件将应用到所有文件
+git checkout -- file_name #工作区变更恢复为暂存区一致
+
+
+--- git log
+git log --oneline --graph --all -n4 #oneline-列表形式，graph-分支辅助线，all-所有分支，n4-最近的4次提交
+git cat-file -t 078d9bca #查看对象类型
+git cat-file -p #打印对象的内容
+
+--- git backup
+git remote add zhineng file:///Users/elm/Elm_workstation.git
+git push --set-upstream zhineng ElmLeung
+git remote -v #查看所有的远程仓库
+git remote add github git@github.com:ElmLeung/elm_workstation.git
+git push github --all
+git fetch github master #拉取远程仓库代码
+git merge 源分支 目标分支
+git pull 相当于fetch,merge
+
+
+
+--- git dir
+```
+elm@elm-Precision-Tower-7910:~/elm_workstation$ tree -L 1 .git 
+.git                 #当前仓库的配置
+├── branches
+├── COMMIT_EDITMSG
+├── config
+├── description
+├── gitk.cache
+├── HEAD             #the current branch 
+├── hooks
+├── index
+├── info
+├── logs
+├── objects          #object tpye:commit,tags,tree,blob
+└── refs             #the hash value of the lastest commit from all branchs
+
+~/.gitconfig         #当前用户的git配置
+```
+--- git object
+- commit: 一个commit 对应一个tree,
+- tree: 相当于快照,保存相应时间点的信息，其中还含有blob的指针，一个blob就是一个数据对象。信息里面的目录也会成为tree 对象。
+- blob: 不管文件名叫什么，只要内容相同就只有一个。
+- 当变更添加到暂存区的时候，git已经创建了blob。
+
+--- 分离头指针
+git checkout 某个commit的时候，会进入分离头状态，这个状态没有跟分支挂钩，切换到其他分支的时候，会被丢弃掉。
+想做一些尝试性的变更，发现效果不好，切换到其他分支
+
+--- git 多人维护
+1. 不同人同一个feature,不同的文件，fetch --> merge
+2. 不同人同一个feature,同一个文件不同区域, fetch --> merge
+3. 不同人同一个feature,同一个feature相同的区域，fetch --> merge, 协调冲突
+>>>>>>> main

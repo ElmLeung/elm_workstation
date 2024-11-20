@@ -1,0 +1,21 @@
+---
+The HTML backup is created every time you close Firefox
+1. access about:config with firefox.
+2. change the set "browser.bookmarks.autoExportHTML" as "true".
+3. create the string pref "browser.bookmarks.file" with the full path including the file name.(e.g. browser.bookmarks.file = /home/elm/elm_workstation/firefox_bookmarks/bookmarks.html)
+
+---
+1.
+$ sudo find / -name ".mozilla"
+[sudo] password for elm: 
+find: ‘/run/user/1000/doc’: Permission denied
+find: ‘/run/user/1000/gvfs’: Permission denied
+find: ‘/proc/11388/task/11388/net’: Invalid argument
+find: ‘/proc/11388/net’: Invalid argument
+/home/elm/snap/firefox/common/.mozilla
+
+2. $ cd /home/elm/snap/firefox/common/.mozilla
+3. $ pwd
+/home/elm/snap/firefox/common/.mozilla/firefox/p2rf1yxc.default
+4. vim prefs.js
+
