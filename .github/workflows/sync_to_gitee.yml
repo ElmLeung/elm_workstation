@@ -1,0 +1,14 @@
+name: sync_to_gitee
+on:
+  schedule:
+    - cron: '0 16 * * *' #UTC 16点为中国时间24点
+jobs:
+  sync:
+    runs-on: ubuntu-lastest
+    steps:
+    - name: checkout respository
+      uses: actions/checkout@v2
+    - name: sync with gitee
+      run:
+        git remote add gitee https://gitee.com/mchappy/elm_workstation.git
+        git push --force gitee master
