@@ -1,3 +1,8 @@
+###
+Github 的愿景是使协作和编写软件更容易
+致力于解决所有软件开发人员遇到的痛苦问题，具有解决人类问题的巨大潜力，轻松，安全和远程协作软件项目
+###
+
 --- 01.安装git
 apt-get install -y git 
 
@@ -62,6 +67,8 @@ git remote -v #查看所有的远程仓库
 git remote add github git@github.com:ElmLeung/elm_workstation.git
 git push github --all
 git fetch github master #拉取远程仓库代码
+git merge 源分支 目标分支
+git pull 相当于fetch,merge
 
 
 
@@ -93,3 +100,8 @@ elm@elm-Precision-Tower-7910:~/elm_workstation$ tree -L 1 .git
 --- 分离头指针
 git checkout 某个commit的时候，会进入分离头状态，这个状态没有跟分支挂钩，切换到其他分支的时候，会被丢弃掉。
 想做一些尝试性的变更，发现效果不好，切换到其他分支
+
+--- git 多人维护
+1. 不同人同一个feature,不同的文件，fetch --> merge
+2. 不同人同一个feature,同一个文件不同区域, fetch --> merge
+3. 不同人同一个feature,同一个feature相同的区域，fetch --> merge, 协调冲突
