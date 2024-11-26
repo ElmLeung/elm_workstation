@@ -98,3 +98,26 @@ net.ipv4.conf.enp1s0.arp_ignore = 1
 net.ipv4.conf.enp1s0.arp_announce = 2
 
 ```
+mysql集群
+```
+apt install mysql-server
+apt install mysql-client
+
+mysql> CREATE DATABASE company;
+mysql> use company;
+mysql> CREATE TABLE staff(ID INT NOT NULL,Name CHAR(20),Age INT);
+mysql> INSERT INTO staff values (1001,'Jerrt',32);
+mysql> CREATE USER 'lvs_user'@'192.168.122.%' IDENTIFIED BY 'qwe123';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'lvs_user'@'192.168.122.%';
+mysql> flush privileges;
+
+mysql -u lvs_user -p -h 192.168.122.200
+```
+--- VRRP
+VIP VMAC
+---
+
+---KeepAlived
+服务器服务的故障转移
+负载均衡器做高可用
+
