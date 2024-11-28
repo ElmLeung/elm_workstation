@@ -30,4 +30,5 @@ ln -s  ~/elm_workstation/terraform/tencent_cloud/.terraformrc ~/.terraformrc
 
 
 ---libvirt
+https://github.com/dmacvicar/terraform-provider-libvirt?tab=readme-ov-file
 ---
