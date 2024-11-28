@@ -1,0 +1,67 @@
+Elm work maunal
+#1
+#Update the apt sourceslist
+#使用阿里云镜像站 https://developer.aliyun.com/mirror/
+```
+#apt aliyun配置文件
+echo "#apt sources list for Ubuntu 24.04 
+deb https://mirrors.aliyun.com/ubuntu/ noble main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ noble main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu/ noble-security main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ noble-security main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu/ noble-updates main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ noble-updates main restricted universe multiverse
+
+# deb https://mirrors.aliyun.com/ubuntu/ noble-proposed main restricted universe multiverse
+# deb-src https://mirrors.aliyun.com/ubuntu/ noble-proposed main restricted universe multiverse
+
+deb https://mirrors.aliyun.com/ubuntu/ noble-backports main restricted universe multiverse
+deb-src https://mirrors.aliyun.com/ubuntu/ noble-backports main restricted universe multiverse " > /etc/apt/etc/apt/sources.list.d/aliyun.sources
+```
+```
+#更新软件清单
+apt update 
+```
+
+#2
+#配置中文输入法
+```
+    打开系统设置：点击右上角的系统菜单栏，选择 “Setting”，进入系统设置界面
+    进入 “Region & Language” 设置选项，点击 “Manage Installed Language” ，出现 “The language support is not installed completely” 选择 “Install”
+    进入 “Language Support” 界面后，点击 “Install/Remove Language”，进入 “Installed Languages” 界面选择 “Chinese（Simplified）” 安装
+
+    到这一步完成之后，选择 “Log Out” 重新登入，打开 “Region & Language” 设置选项，点击 “Language” 就能看到比原来多出一个 “Chinese” 选项，说明我们的系统已经成功支持中文
+```
+```
+打开系统设置，进入 “Keyboard” 设置选项，在 “input Source” 处点击 “+” ，选择 “Chinese”，继续选择 “Chinese（Intelligent Pinyin）”
+
+    到这一步完成之后，右上角会出现输入法选择框，点击即可切换中英文输入法，在中文输入法下按 “Shift” 即可切换中英文
+
+2.设置默认输入法：回到 “input Source” 处，拖动中文输入法到英文输入法上面即可设置默认输入法
+```
+
+#3
+#配置git并clone仓库
+```
+#查看git version,如果没有就安装,常用版本git version 2.43.0
+git version
+```
+```
+#配置个人信息
+git config --global --user.name "ElmLeung"
+git config --global --user.email "liangyu6262@outlook.com"
+#生成ssh密钥文件，将公钥设置到github上
+ssh-keygen -t rsa -b 4096 -C "liangyu6262@outlook.com" -f ~/.ssh/github_connection
+#克隆仓库
+git clone git@github.com:ElmLeung/elm_workstation.git
+```
+
+#4
+#Install ansible
+```
+apt install ansible -y
+```
+
+
