@@ -1,0 +1,54 @@
+##############################################
+#Author: ElmLeung
+#Email: liangyu6262@qq.com
+##############################################
+Wireguard
+实现服务端和本地集群的组网
+
+```
+apt install wireguard
+
+vim /etc/sysctl.conf --> net.ipv4.ip_forward = 1
+sysctl -p
+
+mkdir -p /etc/wireguard && chmod 0777 /etc/wireguard
+cd /etc/wireguard
+umask 077
+
+wg genkey | tee wireguard_server_pri |wg pubkey > wireguard_server_pub
+wg genkey | tee wireguard_client_pri |wg pubkey > wireguard_client_pub
+
+vim /etc/wireguard/wg0.conf
+[Interface]
+Address = 10.0.8.1 #服务端虚拟IP
+PrivateKey =  # 服务端私钥内容
+PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+ListenPort = 50814 # 服务端监听端口
+DNS = 8.8.8.8
+MTU = 1420
+[Peer]
+PublicKey =   # 填写对端的publickey 内容
+AllowedIPs = 10.0.8.2/32 #客户端虚拟IP
+
+wg-quick up wg0
+wg-quick down wg0
+
+systemctl enable wg-quick@wg0
+
+vim /etc/wireguard/wg0.conf
+[Interface]
+Address = 10.0.8.2
+PrivateKey = #客户端私钥
+[Peer]
+PublicKey = gBfKhVWK+rCrLTg3IDPp/E8HUJ3ZYfpk2IJ/nGkTYHI= #服务端公钥
+AllowedIPs = 10.0.8.0/24
+Endpoint = wireguard.elm62.cn:50814
+
+
+``` 
+
+参考:
+1 - https://developer.aliyun.com/article/1380488
+2 - https://www.linode.com/docs/guides/set-up-wireguard-vpn-on-ubuntu/
+3 - https://developer.aliyun.com/article/1380488
