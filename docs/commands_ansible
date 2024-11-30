@@ -1,0 +1,10 @@
+```
+#列出主机列表内容
+ansible-inventory -i inventory --list
+
+#探测主机列表的服务器是否可以通信
+ansible towers -m ping -i inventory.yaml 
+
+#ansible提权
+#https://blog.csdn.net/qq_43551263/article/details/116197470
+```

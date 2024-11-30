@@ -1,0 +1,46 @@
+#group towers 
+towers:
+  hosts:
+    tower_01:
+      #ansible_host: localhost
+      ansible_connection: local
+      ansible_python_interpreter: /usr/bin/python3
+
+#group instances
+instances:
+  hosts:
+    tencent_01:
+      ansible_host: wireguard.elm62.cn
+
+#group datacenter include towers and instances
+datacenter:
+  children:
+    towers:
+    instances:
+
+#group kubemasters
+kubemasters:
+  hosts:
+    master_01:
+      ansible_host:
+    master_02:
+      ansible_host:
+
+#group kubeworkers
+kubeworkers:
+  hosts:
+    worker_01:
+      ansible_host:
+    worker_02:
+      ansible_host:
+    worker_03:
+      ansible_host:
+    
+#group kubernetes
+kubernetes:
+  children:
+    kubemasters:
+    kubeworkers:
+
+vars:
+  ansible_user: elm
