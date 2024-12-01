@@ -1,0 +1,15 @@
+---
+- name: Pre-flight checklist before installing tools
+  hosts: bastions
+  vars_files:
+    - ../vars/terraform_version.yml
+  tasks:
+    - name: Check if terraform version is supported by the provisioner
+      ansible.builtin.fail:
+        msg: The chosen version is not supported, only versions => 1.10.0 are supported
+      when: terraform.version is version('1.10.0', '<')
+        #    - name: Print message
+        #      ansible.builtin.debug:
+        #        msg: terraform.url = {{ terraform.url }}
+        #        msg: terraform.version = {{ terraform.version }}
+ 

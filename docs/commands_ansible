@@ -5,6 +5,15 @@ ansible-inventory -i inventory --list
 #探测主机列表的服务器是否可以通信
 ansible towers -m ping -i inventory.yaml 
 
+#ansible 配置文件优先级: ./ansible.cfg > ~/.ansible.cfg > /etc/ansible/ansible.cfg
+ansible-config init --disable > ansible.cfg
+ansible-config init --disable -t all > ansible.cfg #-t all 为所有已有插件生成ansible.cfg
+
 #ansible提权
 #https://blog.csdn.net/qq_43551263/article/details/116197470
+```
+```
+#--check 检查但不实际应用
+ansible-playbook --check playbook.yaml
+
 ```

@@ -1,0 +1,5 @@
+- name: Setup | Playbook to run pre-flight test to verify vars
+  import_playbook: ./playbooks/00_pre_flight_checklist.yml
+
+- name: Setup | Playbook to install terraform
+  import_playbook: ./playbooks/01_install_virtualization_tools.yml
