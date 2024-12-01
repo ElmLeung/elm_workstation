@@ -1,0 +1,4 @@
+```
+#生成密钥
+ssh-keygen -t rsa -b 4096 -C "liangyu6262@outlook.com" -f ~/.ssh/ansible_connections
+```

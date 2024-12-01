@@ -59,9 +59,11 @@ git clone git@github.com:ElmLeung/elm_workstation.git
 ```
 
 #4
-#Install ansible
 ```
+#安装 ansible
 apt install ansible -y
+#安装ansible modules and pluins
+ansible-galaxy collection install -r ~/elm_workstation/requirements.yml
 ```
 
 
