@@ -64,6 +64,8 @@ git clone git@github.com:ElmLeung/elm_workstation.git
 apt install ansible -y
 #安装ansible modules and pluins
 ansible-galaxy collection install -r ~/elm_workstation/requirements.yml
+#初始化安装软件，需要sudo凭据，看密码有没有需要改变
+ansible-playbook init.yml
 ```
 
 
