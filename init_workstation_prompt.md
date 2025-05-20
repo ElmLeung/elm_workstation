@@ -60,6 +60,8 @@ buddy_command: `sudo apt-get update && sudo apt-get install -y openssh-server ||
 
 buddy_command: `sudo systemctl status ssh || echo "OpenSSH service is not running"`
 
+## git中文显示乱码
+git config --global core.quotepath false
 ## 配置密钥
 敏感信息，不执行，只提示作用
 
